@@ -48,15 +48,16 @@ def writer(request):
         # check whether it's valid:
         if form.is_valid():
             data = form.cleaned_data
+            user = User.objects.filter(username=data['username'])
+            if user.groups.filter(name='admin') == 1:
+                if user.check_password(data['password']):
 
-            if User.objects.filter(username=data['username'], password=data['password']).exists():
-
-                ar = Project.objects.create(
-                    title=data['project_title'], content=data['project_text'], date_posted=timezone.now(), category=data['project_category'])
-                ar.save()
-                messages.success(request, 'your project has been posted')
-            else:
-                messages.warning(request, 'Auth Failed')
+                    ar = Project.objects.create(
+                        title=data['project_title'], content=data['project_text'], date_posted=timezone.now(), category=data['project_category'])
+                    ar.save()
+                    messages.success(request, 'your project has been posted')
+                else:
+                    messages.warning(request, 'Auth Failed')
         return render(request, 'blog/writer.html', {'form': new_project_form})
 
     else:
