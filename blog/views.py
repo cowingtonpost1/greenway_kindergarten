@@ -11,6 +11,7 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated  # <-- Here
 import requests
 import json
+from django.contrib.auth.models import User
 
 
 def Projects(request, **kwargs):
@@ -48,20 +49,14 @@ def writer(request):
         if form.is_valid():
             data = form.cleaned_data
 
-            a = requests.post("http://greenwaykindergarten.herokuapp.com/api-token-auth/?format=json",
-                              data={"username": data['username'], "password": data['password']})
-            dataf = json.loads(a.text)
-            headers = {'Authorization': f'Token {dataf["token"]}'}
-            r = requests.get('http://greenwaykindergarten.herokuapp.com/keyauth',
-                             headers=headers)
-            a = r.data()
-            print(a)
-            if a['isAdmin']:
+            if User.objects.filter(username=data['username'], password=data['password']).exists():
 
                 ar = Project.objects.create(
                     title=data['project_title'], content=data['project_text'], date_posted=timezone.now(), category=data['project_category'])
                 ar.save()
                 messages.success(request, 'your project has been posted')
+            else:
+                messages.warning(request, 'Auth Failed')
         return render(request, 'blog/writer.html', {'form': new_project_form})
 
     else:
