@@ -48,11 +48,11 @@ def writer(request):
         if form.is_valid():
             data = form.cleaned_data
 
-            a = requests.post("http://localhost:8000/api-token-auth/?format=json",
+            a = requests.post("http://greenwaykindergarten.herokuapp.com/api-token-auth/?format=json",
                               data={"username": data['username'], "password": data['password']})
             dataf = json.loads(a.text)
             headers = {'Authorization': f'Token {dataf["token"]}'}
-            if requests.get('http://localhost:8000/keyauth', headers=headers).json()['isAdmin']:
+            if requests.get('http://greenwaykindergarten.herokuapp.com/keyauth', headers=headers).json()['isAdmin']:
 
                 ar = Project.objects.create(
                     title=data['project_title'], content=data['project_text'], date_posted=timezone.now(), category=data['project_category'])
