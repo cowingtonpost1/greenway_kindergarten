@@ -43,10 +43,11 @@ class keyauth(APIView):
 
 def writer(request):
     if request.method == 'POST':
+        messages.success(request, 'you sent a POST request')
         # create a form instance and populate it with data from the request:
         form = new_project_form(request.POST)
-        # check whether it's valid:
         if form.is_valid():
+            messages.success(request, 'form is valid')
             data = form.cleaned_data
             user = User.objects.filter(username=data['username'])[0]
             if user.groups.filter(name='admin') == 1:
