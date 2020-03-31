@@ -50,8 +50,9 @@ def writer(request):
             data = form.cleaned_data
             user = User.objects.filter(username=data['username'])[0]
             if user.groups.filter(name='admin') == 1:
+                messages.success(request, 'you are a admin')
                 if user.check_password(data['password']):
-
+                    messages.success(request, ' your password is correct')
                     ar = Project.objects.create(
                         title=data['project_title'], content=data['project_text'], date_posted=timezone.now(), category=data['project_category'], video=data['project_video'])
                     ar.save()
