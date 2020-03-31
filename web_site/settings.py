@@ -27,7 +27,7 @@ SECRET_KEY = 'qa$@7(bh+e$!ra5s!lk7ak8zsbx_y@w+&0q_hu5(_2-xecf34j'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['greenwaykindergarten.herokuapp.com']
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # Application definition
