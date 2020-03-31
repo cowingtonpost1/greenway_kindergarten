@@ -48,7 +48,7 @@ def writer(request):
         # check whether it's valid:
         if form.is_valid():
             data = form.cleaned_data
-            user = User.objects.filter(username=data['username'])
+            user = User.objects.filter(username=data['username'])[0]
             if user.groups.filter(name='admin') == 1:
                 if user.check_password(data['password']):
 
