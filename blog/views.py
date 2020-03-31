@@ -53,7 +53,7 @@ def writer(request):
                 if user.check_password(data['password']):
 
                     ar = Project.objects.create(
-                        title=data['project_title'], content=data['project_text'], date_posted=timezone.now(), category=data['project_category'])
+                        title=data['project_title'], content=data['project_text'], date_posted=timezone.now(), category=data['project_category'], video=data['project_video'])
                     ar.save()
                     messages.success(request, 'your project has been posted')
                 else:
