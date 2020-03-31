@@ -52,7 +52,9 @@ def writer(request):
                               data={"username": data['username'], "password": data['password']})
             dataf = json.loads(a.text)
             headers = {'Authorization': f'Token {dataf["token"]}'}
-            if requests.get('http://greenwaykindergarten.herokuapp.com/keyauth', headers=headers).json()['isAdmin']:
+            r = requests.get('http://greenwaykindergarten.herokuapp.com/keyauth',
+                             headers=headers).json()
+            if r['isAdmin']:
 
                 ar = Project.objects.create(
                     title=data['project_title'], content=data['project_text'], date_posted=timezone.now(), category=data['project_category'])
