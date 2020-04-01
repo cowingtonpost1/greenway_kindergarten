@@ -10,5 +10,4 @@ class new_project_form(forms.Form):
     project_text = forms.CharField(widget=forms.Textarea())
     project_video = forms.CharField(widget=forms.TextInput(), required=False)
     project_category = forms.ChoiceField(choices=CATEGORIES, required=True)
-    username = forms.CharField(widget=forms.TextInput())
-    password = forms.CharField(widget=forms.TextInput())
+    key = forms.CharField(widget=forms.TextInput())

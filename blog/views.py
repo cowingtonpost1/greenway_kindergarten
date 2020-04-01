@@ -11,6 +11,7 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated  # <-- Here
 import requests
 import json
+import os
 from django.contrib.auth.models import User
 
 
@@ -49,17 +50,15 @@ def writer(request):
         if form.is_valid():
             messages.success(request, 'form is valid')
             data = form.cleaned_data
-            user = User.objects.filter(username=data['username'])[0]
-            if user.groups.filter(name='admin') == 1:
-                messages.success(request, 'you are a admin')
-                if user.check_password(data['password']):
-                    messages.success(request, ' your password is correct')
-                    ar = Project.objects.create(
-                        title=data['project_title'], content=data['project_text'], date_posted=timezone.now(), category=data['project_category'], video=data['project_video'])
-                    ar.save()
-                    messages.success(request, 'your project has been posted')
-                else:
-                    messages.warning(request, 'Auth Failed')
+
+            if data['key'] == os.environ.get('postkey'):
+                messages.success(request, ' your password is correct')
+                ar = Project.objects.create(title=data['project_title'], content=data['project_text'], date_posted=timezone.now(
+                ), category=data['project_category'], video=data['project_video'])
+                ar.save()
+                messages.success(request, 'your project has been posted')
+            else:
+                messages.warning(request, 'Auth Failed')
         return render(request, 'blog/writer.html', {'form': new_project_form})
 
     else:
