@@ -72,7 +72,7 @@ def writer(request):
     videofile = lastvideo.video
     form = new_project_form(request.POST or None, request.FILES or None)
     if form.is_valid():
-
+        form.date_posted = timezone.now()
         form.save(date_posted=timezone.now())
 
     context = {'videofile': videofile,

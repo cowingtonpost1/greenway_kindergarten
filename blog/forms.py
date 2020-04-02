@@ -10,4 +10,4 @@ class new_project_form(forms.ModelForm):
     # key = forms.CharField(widget=forms.TextInput())
     class Meta():
         model = Project
-        exclude = ['id', ]
+        exclude = ['id', 'date_posted']
