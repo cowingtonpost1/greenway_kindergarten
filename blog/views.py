@@ -69,11 +69,8 @@ class keyauth(APIView):
 
 
 def writer(request):
-
     lastvideo = Project.objects.last()
-
     videofile = lastvideo.videofile
-
     form = new_project_form(request.POST or None, request.FILES or None)
     if form.is_valid():
         form.save()
