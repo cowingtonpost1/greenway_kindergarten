@@ -1,5 +1,4 @@
 from .forms import new_project_form
-from .models import Video
 from django.shortcuts import render
 from django.shortcuts import render, HttpResponse
 from django.contrib.auth.decorators import login_required, user_passes_test
