@@ -4,10 +4,11 @@ from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
 from .models import CATEGORIES
 from .models import Project
+from django.utils import timezone
 
 
 class new_project_form(forms.ModelForm):
     # key = forms.CharField(widget=forms.TextInput())
     class Meta():
         model = Project
-        exclude = ['id', 'date_posted']
+        exclude = ['id']

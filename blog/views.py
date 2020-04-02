@@ -76,7 +76,8 @@ def writer(request):
         form.save(date_posted=timezone.now())
 
     context = {'videofile': videofile,
-               'form': form
+               'form': form,
+               'time': timezone.now()
                }
 
     return render(request, 'blog/writer.html', context)

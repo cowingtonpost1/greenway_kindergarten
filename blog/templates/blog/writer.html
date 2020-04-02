@@ -19,6 +19,7 @@
       {% endfor %}
     {% endif %}
     {% load crispy_forms_tags %}
+    <h4>{{ time }}</h4>
     <form action="/admin/" method="post">
     {% csrf_token %}
     {{ form | crispy }}
