@@ -14,6 +14,7 @@ CATEGORIES = (
 class Project(models.Model):
     title = models.CharField(max_length=50)
     content = models.TextField()
-    video = models.CharField(max_length=250, default='')
+    # video = models.CharField(max_length=250, default='')
+    video = models.FileField(upload_to='videos')
     date_posted = models.DateTimeField(timezone.now)
     category = models.CharField(max_length=3, choices=CATEGORIES)
