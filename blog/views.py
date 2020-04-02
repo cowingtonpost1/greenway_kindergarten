@@ -1,10 +1,13 @@
+from .forms import VideoForm
+from .models import Video
+from django.shortcuts import render
 from django.shortcuts import render, HttpResponse
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib import messages
 from .models import Project
 from . import models
 from django.utils import timezone
-# Create your views here.
+from .forms import new_project_form
 from .forms import new_project_form
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -42,24 +45,41 @@ class keyauth(APIView):
         return Response(content)
 
 
+# def writer(request):
+#     if request.method == 'POST':
+#         messages.success(request, 'you sent a POST requuest')
+#         # create a form instance and populate it with data from the request:
+#         form = new_project_form(request.POST)
+#         if form.is_valid():
+#             messages.success(request, 'form is valid')
+#             data = form.cleaned_data
+#
+#             if data['key'] == os.environ.get('postkey'):
+#                 messages.success(request, ' your password is correct')
+#                 ar = Project.objects.create(title=data['project_title'], content=data['project_text'], date_posted=timezone.now(
+#                 ), category=data['project_category'], video=data['project_video'])
+#                 ar.save()
+#                 messages.success(request, 'your project has been posted')
+#             else:
+#                 messages.warning(request, 'Auth Failed')
+#         return render(request, 'blog/writer.html', {'form': new_project_form})
+#
+#     else:
+#         return render(request, 'blog/writer.html', {'form': new_project_form})
+
+
 def writer(request):
-    if request.method == 'POST':
-        messages.success(request, 'you sent a POST requuest')
-        # create a form instance and populate it with data from the request:
-        form = new_project_form(request.POST)
-        if form.is_valid():
-            messages.success(request, 'form is valid')
-            data = form.cleaned_data
 
-            if data['key'] == os.environ.get('postkey'):
-                messages.success(request, ' your password is correct')
-                ar = Project.objects.create(title=data['project_title'], content=data['project_text'], date_posted=timezone.now(
-                ), category=data['project_category'], video=data['project_video'])
-                ar.save()
-                messages.success(request, 'your project has been posted')
-            else:
-                messages.warning(request, 'Auth Failed')
-        return render(request, 'blog/writer.html', {'form': new_project_form})
+    lastvideo = Project.objects.last()
 
-    else:
-        return render(request, 'blog/writer.html', {'form': new_project_form})
+    videofile = lastvideo.videofile
+
+    form = new_project_form(request.POST or None, request.FILES or None)
+    if form.is_valid():
+        form.save()
+
+    context = {'videofile': videofile,
+               'form': form
+               }
+
+    return render(request, 'blog/writer.html', context)
