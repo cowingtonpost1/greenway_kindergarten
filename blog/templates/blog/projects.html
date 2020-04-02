@@ -17,12 +17,12 @@
         </div>
       {% endfor %}
     {% endif %}
-    {% block content %}{% endblock %}
+    <a href="https://sites.google.com/beaverton.k12.or.us/greenwaykindergarten/home">Back to site</a>
     {% for project in Projects %}
         <div class="border border-primary article-container" style="margin-bottom:25px;">
                         <h3>{{ project.title}}</h3>
                         <p>{{ project.content | linebreaks }}</p>
-                        <iframe width="560" height="315" src="{{ project.video }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        <a href="{{ project.video }}">Click Here to watch the video</a>
         </div>
     {% endfor %}
     </div>
