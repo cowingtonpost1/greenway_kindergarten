@@ -44,40 +44,40 @@ class keyauth(APIView):
         return Response(content)
 
 
-# def writer(request):
-#     if request.method == 'POST':
-#         messages.success(request, 'you sent a POST requuest')
-#         # create a form instance and populate it with data from the request:
-#         form = new_project_form(request.POST)
-#         if form.is_valid():
-#             messages.success(request, 'form is valid')
-#             data = form.cleaned_data
-#
-#             if data['key'] == os.environ.get('postkey'):
-#                 messages.success(request, ' your password is correct')
-#                 ar = Project.objects.create(title=data['project_title'], content=data['project_text'], date_posted=timezone.now(
-#                 ), category=data['project_category'], video=data['project_video'])
-#                 ar.save()
-#                 messages.success(request, 'your project has been posted')
-#             else:
-#                 messages.warning(request, 'Auth Failed')
-#         return render(request, 'blog/writer.html', {'form': new_project_form})
-#
-#     else:
-#         return render(request, 'blog/writer.html', {'form': new_project_form})
-
-
 def writer(request):
-    lastvideo = Project.objects.last()
-    videofile = lastvideo.video
-    form = new_project_form(request.POST or None, request.FILES or None)
-    if form.is_valid():
-        form.date_posted = timezone.now()
-        form.save(date_posted=timezone.now())
+    if request.method == 'POST':
+        messages.success(request, 'you sent a POST requuest')
+        # create a form instance and populate it with data from the request:
+        form = new_project_form(request.POST)
+        if form.is_valid():
+            messages.success(request, 'form is valid')
+            data = form.cleaned_data
 
-    context = {'videofile': videofile,
-               'form': form,
-               'time': timezone.now()
-               }
+            if data['key'] == os.environ.get('postkey'):
+                messages.success(request, ' your password is correct')
+                ar = Project.objects.create(title=data['project_title'], content=data['project_text'], date_posted=timezone.now(
+                ), category=data['project_category'], video=request.FILES['project_video'])
+                ar.save()
+                messages.success(request, 'your project has been posted')
+            else:
+                messages.warning(request, 'Auth Failed')
+        return render(request, 'blog/writer.html', {'form': new_project_form})
 
-    return render(request, 'blog/writer.html', context)
+    else:
+        return render(request, 'blog/writer.html', {'form': new_project_form})
+
+
+# def writer(request):
+#     lastvideo = Project.objects.last()
+#     videofile = lastvideo.video
+#     form = new_project_form(request.POST or None, request.FILES or None)
+#     if form.is_valid():
+#         form.date_posted = timezone.now()
+#         form.save(date_posted=timezone.now())
+#
+#     context = {'videofile': videofile,
+#                'form': form,
+#                'time': timezone.now()
+#                }
+#
+#     return render(request, 'blog/writer.html', context)

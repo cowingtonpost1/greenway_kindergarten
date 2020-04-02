@@ -3,12 +3,11 @@ from django import forms
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
 from .models import CATEGORIES
-from .models import Project
-from django.utils import timezone
 
 
 class new_project_form(forms.ModelForm):
-    # key = forms.CharField(widget=forms.TextInput())
-    class Meta():
-        model = Project
-        exclude = ['id']
+    project_title = forms.CharField(widget=forms.TextInput())
+    project_text = forms.CharField(widget=forms.Textarea())
+    project_video = forms.FileField()
+    project_category = forms.ChoiceField(choices=CATEGORIES, required=True)
+    key = forms.CharField(widget=forms.TextInput)
