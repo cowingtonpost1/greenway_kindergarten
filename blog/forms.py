@@ -5,7 +5,7 @@ from django.utils.translation import ugettext_lazy as _
 from .models import CATEGORIES
 
 
-class new_project_form(forms.ModelForm):
+class new_project_form(forms.Form):
     project_title = forms.CharField(widget=forms.TextInput())
     project_text = forms.CharField(widget=forms.Textarea())
     project_video = forms.FileField()
