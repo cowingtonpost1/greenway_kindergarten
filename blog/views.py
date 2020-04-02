@@ -1,4 +1,4 @@
-from .forms import VideoForm
+from .forms import new_project_form
 from .models import Video
 from django.shortcuts import render
 from django.shortcuts import render, HttpResponse
@@ -70,7 +70,7 @@ class keyauth(APIView):
 
 def writer(request):
     lastvideo = Project.objects.last()
-    videofile = lastvideo.videofile
+    videofile = lastvideo.video
     form = new_project_form(request.POST or None, request.FILES or None)
     if form.is_valid():
         form.save()
