@@ -18,7 +18,7 @@ from django.contrib.auth.models import User
 from django.views import View
 from django.http import JsonResponse
 
-from django_backend.custom_storages import MediaStorage
+from .storage import MediaStorage
 
 
 def Projects(request, **kwargs):
