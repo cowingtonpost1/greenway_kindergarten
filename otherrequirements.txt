@@ -11,8 +11,6 @@ docutils
 gunicorn
 idna
 jmespath
-Pillow
-psycopg2
 python-dateutil
 pytz
 s3transfer

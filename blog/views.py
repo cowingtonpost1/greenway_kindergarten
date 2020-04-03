@@ -60,7 +60,7 @@ def writer(request):
                 ar.save()
                 messages.success(request, 'your project has been posted')
             else:
-                messages.warning(request, 'Auth Failed')
+                messages.warning(request, 'Auth Failed')															
         return render(request, 'blog/writer.html', {'form': new_project_form})
 
     else:
