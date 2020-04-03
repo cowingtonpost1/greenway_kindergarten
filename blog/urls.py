@@ -20,7 +20,6 @@ from rest_framework.authtoken.views import obtain_auth_token
 
 urlpatterns = [
     path('projects/<str:category>/', views.Projects,  name="blog-reading"),
-    path('admin/', views.writer),
     path('api-token-auth/', obtain_auth_token, name='api_token_auth'),
     path('keyauth/', views.keyauth.as_view(), name='hello'),
 ]
