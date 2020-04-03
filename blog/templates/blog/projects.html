@@ -22,8 +22,8 @@
         <div class="border border-primary article-container" style="margin-bottom:25px;">
                         <h3>{{ project.title}}</h3>
                         <p>{{ project.content | linebreaks }}</p>
-                        <a href="{{ project.video }}">Click Here to watch the video</a>
-                        <iframe src="{{ project.video }}" width="500" height="500"></iframe>
+                        <a href="https://greenway-kindergarten-files.s3.us-west-2.amazonaws.com/mediafiles/{{ project.video }}">Click Here to watch the video</a>
+                        <iframe src="https://greenway-kindergarten-files.s3.us-west-2.amazonaws.com/mediafiles/{{ project.video }}" width="500" height="500"></iframe>
         </div>
     {% endfor %}
     </div>
