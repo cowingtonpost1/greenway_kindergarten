@@ -156,3 +156,11 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'mediafiles')
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'web_site/static'),
 )
+AWS_STATIC_LOCATION = 'static'
+STATIC_URL = 'https://{}/{}/'.format(AWS_S3_CUSTOM_DOMAIN, AWS_STATIC_LOCATION)
+STATICFILES_STORAGE = 'web_site.storage.StaticStorage'
+
+DEFAULT_FILE_STORAGE = 'web_site.storage.MediaStorage'
+AWS_PUBLIC_MEDIA_LOCATION = 'mediafiles'
+
+AWS_PRIVATE_MEDIA_LOCATION = 'private'
