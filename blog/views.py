@@ -1,4 +1,5 @@
 from .forms import new_project_form
+from django.core.files.storage import default_storage
 from django.shortcuts import render
 from django.shortcuts import render, HttpResponse
 from django.contrib.auth.decorators import login_required, user_passes_test
@@ -47,7 +48,7 @@ def writer(request):
     if request.method == 'POST':
         messages.success(request, 'you sent a POST requuest')
         # create a form instance and populate it with data from the request:
-        form = new_project_form(request.POST)
+        form = new_project_form(request.POST, files=request.FILES)
         if form.is_valid():
             messages.success(request, 'form is valid')
             data = form.cleaned_data
