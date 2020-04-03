@@ -23,6 +23,7 @@
                         <h3>{{ project.title}}</h3>
                         <p>{{ project.content | linebreaks }}</p>
                         <a href="{{ project.video }}">Click Here to watch the video</a>
+                        <iframe src="{{ project.video }}" width="500" height="500"></iframe>
         </div>
     {% endfor %}
     </div>
