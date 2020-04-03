@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.db import models
 
-from .storage_backends import PrivateStorage
+from .storage import PrivateStorage
 
 
 class PrivateFileField(models.FileField):
