@@ -45,6 +45,7 @@ class keyauth(APIView):
 
 
 def writer(request):
+    messages.info(request, default_storage.connection)
     if request.method == 'POST':
         messages.success(request, 'you sent a POST requuest')
         # create a form instance and populate it with data from the request:
