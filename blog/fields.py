@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.db import models
 
-from .storage import PrivateStorage
+from .storage import PrivateStorage, MediaStorage
 
 
 class PrivateFileField(models.FileField):
@@ -16,5 +16,5 @@ class PublicFileField(models.FileField):
     def __init__(self, verbose_name=None, name=None, upload_to='', storage=None, **kwargs):
         storage = None
         if hasattr(settings, 'AWS_PUBLIC_MEDIA_LOCATION'):
-            storage = PrivateStorage()
+            storage = MediaStorage()
         super().__init__(verbose_name, name, upload_to, storage, **kwargs)
