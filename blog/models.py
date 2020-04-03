@@ -9,6 +9,7 @@ CATEGORIES = (
     ("P", "Phonics"),
     ("S", "Science/Social Studies"),
     ("SEL", "Social Emotional Learning"),
+    ('T', 'Tech')
 )
 
 
