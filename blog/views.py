@@ -11,7 +11,6 @@ from .forms import new_project_form
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated  # <-- Here
-import requests
 import json
 import os
 from django.contrib.auth.models import User
@@ -60,7 +59,7 @@ def writer(request):
                 ar.save()
                 messages.success(request, 'your project has been posted')
             else:
-                messages.warning(request, 'Auth Failed')															
+                messages.warning(request, 'Auth Failed')
         return render(request, 'blog/writer.html', {'form': new_project_form})
 
     else:
