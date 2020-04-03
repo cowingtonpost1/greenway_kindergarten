@@ -13,8 +13,8 @@ class PrivateFileField(models.FileField):
 
 
 class PublicFileField(models.FileField):
-    def __init__(self, verbose_name=None, name=None, upload_to='', storage=None, **kwargs):
+    def __init__(self, verbose_name=None, name=None, upload_to='', storage=None, required=False, **kwargs):
         storage = None
         if hasattr(settings, 'AWS_PUBLIC_MEDIA_LOCATION'):
             storage = MediaStorage()
-        super().__init__(verbose_name, name, upload_to, storage, **kwargs)
+        super().__init__(verbose_name, name, upload_to, storage, required=required, **kwargs)
