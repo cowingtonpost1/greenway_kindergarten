@@ -15,6 +15,10 @@ from rest_framework.permissions import IsAuthenticated  # <-- Here
 import json
 import os
 from django.contrib.auth.models import User
+from django.views import View
+from django.http import JsonResponse
+
+from django_backend.custom_storages import MediaStorage
 
 
 def Projects(request, **kwargs):
@@ -47,11 +51,15 @@ class keyauth(APIView):
 def writer(request):
     messages.info(request, default_storage.connection)
     if request.method == 'POST':
+        file = default_storage.open('storage_test', 'w')
+        file.write('storage contents')
+        file.close()
         messages.success(request, 'you sent a POST requuest')
         # create a form instance and populate it with data from the request:
         form = new_project_form(request.POST, files=request.FILES)
         if form.is_valid():
             messages.success(request, 'form is valid')
+
             data = form.cleaned_data
 
             if data['key'] == os.environ.get('postkey'):
