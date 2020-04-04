@@ -1,1 +1,1 @@
-web: gunicorn web_site.wsgi -t 240 --log-file=-
+web: gunicorn web_site.wsgi -t 480 --log-file=-
